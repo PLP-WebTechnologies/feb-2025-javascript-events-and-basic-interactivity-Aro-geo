@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Concepts Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        section {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #3498db;
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: -10px;
+        }
+        input, select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .error {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+        .success {
+            color: #27ae60;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
+        #theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px 15px;
+            background-color: #2c3e50;
+        }
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        .dark-mode section {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+        }
+        .dark-mode h1, .dark-mode h2 {
+            color: #5d9cec;
+        }
+        .dark-mode input, .dark-mode select {
+            background-color: #333;
+            color: #f0f0f0;
+            border-color: #444;
+        }
+        #counter-value {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .counter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .counter-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #hover-box {
+            width: 200px;
+            height: 200px;
+            background-color: #3498db;
+            margin: 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            border-bottom: 1px dotted #666;
+            margin-left: 5px;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle">Toggle Dark Mode</button>
+    
+    <h1>JavaScript Concepts Demonstration</h1>
+    
+    <section id="event-listeners">
+        <h2>Event Listeners</h2>
+        <p>This section demonstrates various event listeners in action.</p>
+        
+        <div id="hover-box">Hover over me!</div>
+        
+        <div class="counter-buttons">
+            <button class="counter-btn" id="decrement">-</button>
+            <button class="counter-btn" id="increment">+</button>
+        </div>
+        <div id="counter-value">0</div>
+        
+        <p>Click anywhere on the page and check the console for click coordinates.</p>
+    </section>
+    
+    <section id="form-validation">
+        <h2>Form Validation</h2>
+        <p>Try submitting the form with invalid data to see validation in action.</p>
+        
+        <form id="user-form">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" placeholder="Enter your full name">
+            <div class="error" id="name-error">Name must be at least 3 characters</div>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email">
+            <div class="error" id="email-error">Please enter a valid email address</div>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Create a password">
+            <div class="error" id="password-error">Password must be at least 8 characters</div>
+            
+            <label for="age">Age:</label>
+            <input type="number" id="age" placeholder="Enter your age" min="13" max="120">
+            <div class="error" id="age-error">Age must be between 13 and 120</div>
+            
+            <label for="country">Country:</label>
+            <select id="country" required>
+                <option value="">Select your country</option>
+                <option value="US">United States</option>
+                <option value="UK">United Kingdom</option>
+                <option value="CA">Canada</option>
+                <option value="AU">Australia</option>
+                <option value="FR">France</option>
+            </select>
+            <div class="error" id="country-error">Please select a country</div>
+            
+            <button type="submit">Submit</button>
+        </form>
+        
+        <div class="success" id="form-success">Form submitted successfully!</div>
+    </section>
+    
+    <section id="interactive-elements">
+        <h2>Interactive Elements</h2>
+        <p>This section shows various interactive elements powered by JavaScript.</p>
+        
+        <button id="random-color">Generate Random Color</button>
+        <div id="color-display" style="width: 100%; height: 100px; margin-top: 20px; border-radius: 4px;"></div>
+        
+        <div style="margin-top: 30px;">
+            <p>Tooltip example: Hover over the <span class="tooltip">question mark<span class="tooltiptext">This is a tooltip that appears on hover!</span></span></p>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <button id="fetch-data">Fetch Random User Data</button>
+            <div id="user-data" style="margin-top: 20px; padding: 15px; background-color: #eee; border-radius: 4px; display: none;"></div>
+        </div>
+    </section>
+
+    <script>
+        // Event Listeners Section
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded and parsed');
+            
+            // Theme toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+            });
+            
+            // Counter functionality
+            let counter = 0;
+            const counterValue = document.getElementById('counter-value');
+            const incrementBtn = document.getElementById('increment');
+            const decrementBtn = document.getElementById('decrement');
+            
+            incrementBtn.addEventListener('click', function() {
+                counter++;
+                counterValue.textContent = counter;
+            });
+            
+            decrementBtn.addEventListener('click', function() {
+                counter--;
+                counterValue.textContent = counter;
+            });
+            
+            // Hover box
+            const hoverBox = document.getElementById('hover-box');
+            hoverBox.addEventListener('mouseenter', function() {
+                this.textContent = 'Mouse entered!';
+                this.style.backgroundColor = '#e74c3c';
+            });
+            
+            hoverBox.addEventListener('mouseleave', function() {
+                this.textContent = 'Hover over me!';
+                this.style.backgroundColor = '#3498db';
+            });
+            
+            // Click coordinates logger
+            document.addEventListener('click', function(e) {
+                console.log(`Clicked at coordinates: X=${e.clientX}, Y=${e.clientY}`);
+            });
+            
+            // Form Validation Section
+            const form = document.getElementById('user-form');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const ageInput = document.getElementById('age');
+            const countryInput = document.getElementById('country');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // Reset errors
+                document.querySelectorAll('.error').forEach(el => el.style.display = 'none');
+                
+                // Name validation
+                if (nameInput.value.length < 3) {
+                    document.getElementById('name-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput.value)) {
+                    document.getElementById('email-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Password validation
+                if (passwordInput.value.length < 8) {
+                    document.getElementById('password-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Age validation
+                const age = parseInt(ageInput.value);
+                if (isNaN(age) || age < 13 || age > 120) {
+                    document.getElementById('age-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                // Country validation
+                if (countryInput.value === '') {
+                    document.getElementById('country-error').style.display = 'block';
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // Form is valid, show success message
+                    document.getElementById('form-success').style.display = 'block';
+                    form.reset();
+                    
+                    // Hide success message after 3 seconds
+                    setTimeout(() => {
+                        document.getElementById('form-success').style.display = 'none';
+                    }, 3000);
+                }
+            });
+            
+            // Interactive Elements Section
+            const randomColorBtn = document.getElementById('random-color');
+            const colorDisplay = document.getElementById('color-display');
+            
+            randomColorBtn.addEventListener('click', function() {
+                const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+                colorDisplay.style.backgroundColor = randomColor;
+                colorDisplay.textContent = randomColor;
+                colorDisplay.style.color = getContrastColor(randomColor);
+            });
+            
+            function getContrastColor(rgbColor) {
+                // Convert rgb(r, g, b) to [r, g, b]
+                const rgb = rgbColor.match(/\d+/g).map(Number);
+                const brightness = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
+                return brightness > 128 ? 'black' : 'white';
+            }
+            
+            // Fetch data button
+            const fetchDataBtn = document.getElementById('fetch-data');
+            const userDataDiv = document.getElementById('user-data');
+            
+            fetchDataBtn.addEventListener('click', function() {
+                fetch('https://randomuser.me/api/')
+                    .then(response => response.json())
+                    .then(data => {
+                        const user = data.results[0];
+                        userDataDiv.innerHTML = `
+                            <h3>Random User Data</h3>
+                            <p><strong>Name:</strong> ${user.name.first} ${user.name.last}</p>
+                            <p><strong>Email:</strong> ${user.email}</p>
+                            <p><strong>Location:</strong> ${user.location.city}, ${user.location.country}</p>
+                            <img src="${user.picture.medium}" alt="User thumbnail" style="border-radius: 50%; margin-top: 10px;">
+                        `;
+                        userDataDiv.style.display = 'block';
+                    })
+                    .catch(error => {
+                        userDataDiv.innerHTML = `<p>Error fetching data: ${error.message}</p>`;
+                        userDataDiv.style.display = 'block';
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
